@@ -4,6 +4,9 @@ import 'package:to_do_app/core/models/to_do_model.dart';
 
 class ToDoProvider extends ChangeNotifier {
   List<ToDoModel> toDoList = [];
+  int getNextId() {
+    return toDoList.length + 1;
+  }
   void _update() {
     var hiveBox = Hive.box<ToDoModel>('toDoBox');
     toDoList = hiveBox.values.toList();

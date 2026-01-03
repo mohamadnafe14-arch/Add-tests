@@ -1,8 +1,11 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:get/route_manager.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:to_do_app/core/models/to_do_model.dart';
+import 'package:to_do_app/features/splash/presentation/views/splash_screen.dart';
 
-void main() async{
+void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Hive.initFlutter();
   Hive.registerAdapter(ToDoModelAdapter());
@@ -15,6 +18,21 @@ class ToDoApp extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return ScreenUtilInit(
+      designSize: const Size(375, 812),
+      minTextAdapt: true,
+      splitScreenMode: true,
+      builder: (context, child) {
+        return GetMaterialApp(
+          debugShowCheckedModeBanner: false,
+          title: 'To-Do App',
+          theme: ThemeData.dark().copyWith(
+            scaffoldBackgroundColor: const Color(0xFF121212),
+          ),
+          home: child,
+        );
+      },
+      child: const SpalshScreen(),
+    );
   }
 }
