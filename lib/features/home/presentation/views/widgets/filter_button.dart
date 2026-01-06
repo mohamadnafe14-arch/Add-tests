@@ -14,7 +14,7 @@ class FilterButton extends StatelessWidget {
       style: ElevatedButton.styleFrom(
         backgroundColor: isSelected
             ? Colors.blue
-            : Colors.grey, // Change color if selected
+            : Colors.grey, 
       ),
       onPressed: () {
         provider.setFilter(filter);
