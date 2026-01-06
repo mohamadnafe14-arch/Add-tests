@@ -9,9 +9,20 @@ class HomeView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create:(context) => ToDoProvider(),
-      child: const Scaffold(
-        body:HomeViewBody() ,
+      create: (context) => ToDoProvider(),
+      child: Scaffold(
+        appBar: AppBar(
+          title: const Text('To-Do App'),
+          centerTitle: true,
+          automaticallyImplyLeading: false,
+        ),
+        body: HomeViewBody(),
+        floatingActionButton: FloatingActionButton(
+          shape: const CircleBorder(),
+          backgroundColor: Colors.blue,
+          onPressed: () {},
+          child: const Icon(Icons.add),
+        ),
       ),
     );
   }
