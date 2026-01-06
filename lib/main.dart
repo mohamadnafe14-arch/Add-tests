@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
+import 'package:provider/provider.dart';
 import 'package:to_do_app/core/models/to_do_model.dart';
+import 'package:to_do_app/core/providers/to_do_provider.dart';
 import 'package:to_do_app/core/utils/route_pages.dart';
 import 'package:to_do_app/features/splash/presentation/views/splash_screen.dart';
 
@@ -23,12 +25,15 @@ class ToDoApp extends StatelessWidget {
       minTextAdapt: true,
       splitScreenMode: true,
       builder: (context, child) {
-        return MaterialApp.router(
-          routerConfig: RoutePages.router,
-          debugShowCheckedModeBanner: false,
-          title: 'To-Do App',
-          theme: ThemeData.dark().copyWith(
-            scaffoldBackgroundColor: const Color(0xFF121212),
+        return ChangeNotifierProvider(
+          create: (context) => ToDoProvider(),
+          child: MaterialApp.router(
+            routerConfig: RoutePages.router,
+            debugShowCheckedModeBanner: false,
+            title: 'To-Do App',
+            theme: ThemeData.dark().copyWith(
+              scaffoldBackgroundColor: const Color(0xFF121212),
+            ),
           ),
         );
       },
