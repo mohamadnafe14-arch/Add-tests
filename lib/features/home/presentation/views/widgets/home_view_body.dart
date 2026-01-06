@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import 'package:to_do_app/core/providers/to_do_provider.dart';
+import 'package:to_do_app/features/home/presentation/views/widgets/task_item.dart';
 
 class HomeViewBody extends StatelessWidget {
   const HomeViewBody({super.key});
@@ -20,28 +21,7 @@ class HomeViewBody extends StatelessWidget {
         return ListView.builder(
           itemCount: provider.toDoList.length,
           itemBuilder: (context, index) {
-            return ListTile(
-              leading: Checkbox(
-                value: provider.toDoList[index].isCompleted,
-                onChanged: (value) {
-                  provider.toggleToDoStatus(toDo: provider.toDoList[index]);
-                },
-              ),
-              title: Text(
-                provider.toDoList[index].title,
-                style: TextStyle(
-                  decoration: provider.toDoList[index].isCompleted
-                      ? TextDecoration.lineThrough
-                      : TextDecoration.none,
-                ),
-              ),
-              trailing: IconButton(
-                icon: const Icon(Icons.delete),
-                onPressed: () {
-                  provider.removeToDo(provider.toDoList[index]);
-                },
-              ),
-            );
+            return TaskItem(provider: provider, index: index);
           },
         );
       },
