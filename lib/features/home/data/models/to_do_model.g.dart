@@ -17,24 +17,21 @@ class ToDoModelAdapter extends TypeAdapter<ToDoModel> {
       for (int i = 0; i < numOfFields; i++) reader.readByte(): reader.read(),
     };
     return ToDoModel(
-      id: fields[0] as String,
-      title: fields[1] as String,
-      isCompleted: fields[2] as bool,
-      createdAt: fields[3] as DateTime,
+      title: fields[0] as String,
+      isCompleted: fields[1] as bool,
+      createdAt: fields[2] as DateTime,
     );
   }
 
   @override
   void write(BinaryWriter writer, ToDoModel obj) {
     writer
-      ..writeByte(4)
-      ..writeByte(0)
-      ..write(obj.id)
-      ..writeByte(1)
-      ..write(obj.title)
-      ..writeByte(2)
-      ..write(obj.isCompleted)
       ..writeByte(3)
+      ..writeByte(0)
+      ..write(obj.title)
+      ..writeByte(1)
+      ..write(obj.isCompleted)
+      ..writeByte(2)
       ..write(obj.createdAt);
   }
 

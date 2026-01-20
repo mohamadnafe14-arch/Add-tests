@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:to_do_app/core/providers/to_do_provider.dart';
+import 'package:to_do_app/features/home/presentation/view_models/providers/to_do_provider.dart';
+import 'package:to_do_app/features/home/data/repo/home_repo.dart';
 
 class FilterButton extends StatelessWidget {
   const FilterButton({super.key, required this.text, required this.filter});

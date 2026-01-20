@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:hive_flutter/hive_flutter.dart';
 import 'package:provider/provider.dart';
-import 'package:to_do_app/core/models/to_do_model.dart';
-import 'package:to_do_app/core/providers/to_do_provider.dart';
+import 'package:to_do_app/core/utils/service_locator.dart';
+import 'package:to_do_app/features/home/data/models/to_do_model.dart';
+import 'package:to_do_app/features/home/presentation/view_models/providers/to_do_provider.dart';
 import 'package:to_do_app/core/utils/route_pages.dart';
+import 'package:to_do_app/features/home/data/repo/home_repo.dart';
 import 'package:to_do_app/features/splash/presentation/views/splash_screen.dart';
 
 void main() async {
@@ -12,6 +14,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(ToDoModelAdapter());
   await Hive.openBox<ToDoModel>('toDoBox');
+  setupLocator();
   runApp(const ToDoApp());
 }
 
@@ -26,7 +29,9 @@ class ToDoApp extends StatelessWidget {
       splitScreenMode: true,
       builder: (context, child) {
         return ChangeNotifierProvider(
-          create: (context) => ToDoProvider(),
+          create: (context) => ToDoProvider(
+            homeRepo: getIt.get<HomeRepo>(),
+          ),
           child: MaterialApp.router(
             routerConfig: RoutePages.router,
             debugShowCheckedModeBanner: false,

@@ -2,8 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:go_router/go_router.dart';
 import 'package:provider/provider.dart';
-import 'package:to_do_app/core/models/to_do_model.dart';
-import 'package:to_do_app/core/providers/to_do_provider.dart';
+import 'package:to_do_app/features/home/data/models/to_do_model.dart';
+import 'package:to_do_app/features/home/presentation/view_models/providers/to_do_provider.dart';
 
 class AddTaskScreenBody extends StatefulWidget {
   const AddTaskScreenBody({super.key});
@@ -49,7 +49,6 @@ class _AddTaskScreenBodyState extends State<AddTaskScreenBody> {
               if (formKey.currentState!.validate()) {
                 formKey.currentState!.save();
                 final toDo = ToDoModel(
-                  id: DateTime.now().millisecondsSinceEpoch.toString(),
                   title: taskTitle!,
                   isCompleted: false,
                   createdAt: DateTime.now(),

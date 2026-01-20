@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:provider/provider.dart';
-import 'package:to_do_app/core/providers/to_do_provider.dart';
+import 'package:to_do_app/features/home/presentation/view_models/providers/to_do_provider.dart';
+import 'package:to_do_app/features/home/data/repo/home_repo.dart';
 import 'package:to_do_app/features/home/presentation/views/widgets/filter_button.dart';
 import 'package:to_do_app/features/home/presentation/views/widgets/task_item.dart';
 
@@ -38,7 +39,7 @@ class HomeViewBody extends StatelessWidget {
         SizedBox(height: 16.h),
         Consumer<ToDoProvider>(
           builder: (context, provider, child) {
-            if (provider.filteredToDoList.isEmpty) {
+            if (provider.toDoList.isEmpty) {
               return const Center(
                 child: Column(
                   mainAxisAlignment: MainAxisAlignment.center,
@@ -58,9 +59,9 @@ class HomeViewBody extends StatelessWidget {
             }
             return Expanded(
               child: ListView.builder(
-                itemCount: provider.filteredToDoList.length,
+                itemCount: provider.toDoList.length,
                 itemBuilder: (context, index) {
-                  return TaskItem(toDo: provider.filteredToDoList[index]);
+                  return TaskItem(toDo: provider.toDoList[index]);
                 },
               ),
             );

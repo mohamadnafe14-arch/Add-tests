@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
-import 'package:to_do_app/core/models/to_do_model.dart';
-import 'package:to_do_app/core/providers/to_do_provider.dart';
+import 'package:to_do_app/features/home/data/models/to_do_model.dart';
+import 'package:to_do_app/features/home/presentation/view_models/providers/to_do_provider.dart';
 
 class TaskItem extends StatelessWidget {
   const TaskItem({super.key, required this.toDo});
