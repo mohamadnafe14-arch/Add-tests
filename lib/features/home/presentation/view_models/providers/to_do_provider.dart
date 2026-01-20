@@ -39,4 +39,8 @@ class ToDoProvider extends ChangeNotifier {
     filter = homeRepo.filter;
     notifyListeners();
   }
+  void updateToDo({required ToDoModel toDo, String? title}) {
+    homeRepo.updateToDo(toDo: toDo, title: title);
+    _update();
+  }
 }
