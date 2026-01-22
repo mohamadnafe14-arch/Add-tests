@@ -2,7 +2,6 @@ import 'dart:io';
 
 import 'package:flutter_test/flutter_test.dart';
 import 'package:hive_flutter/hive_flutter.dart';
-import 'package:to_do_app/core/utils/service_locator.dart';
 import 'package:to_do_app/features/home/data/models/to_do_model.dart';
 import 'package:to_do_app/features/home/data/repo/home_repo.dart';
 import 'package:to_do_app/features/home/data/repo/home_repo_impl.dart';
