@@ -14,4 +14,19 @@ class ToDoModel extends HiveObject {
     this.isCompleted = false,
     required this.createdAt,
   });
+  @override
+  String toString() => 'ToDoModel(title: $title, isCompleted: $isCompleted)';
+  @override
+  bool operator ==(Object other) {
+    if (other is ToDoModel) {
+      return title == other.title &&
+          isCompleted == other.isCompleted &&
+          createdAt == other.createdAt;
+    }
+    return false;
+  }
+  
+  @override
+  int get hashCode => Object.hash(title, isCompleted, createdAt);
+  
 }
