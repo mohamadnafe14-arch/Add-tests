@@ -1,6 +1,9 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:integration_test/integration_test.dart';
+import 'package:path/path.dart' as path;
 import 'package:provider/provider.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:to_do_app/features/home/presentation/views/home_view.dart';
@@ -16,7 +19,15 @@ void main() {
     late Box<ToDoModel> toDoBox;
     late ToDoProvider toDoProvider;
     setUpAll(() async {
-      await Hive.initFlutter();
+      final testDir = Directory(
+        path.join(
+          Directory.systemTemp.path,
+          'hive_test_${DateTime.now().millisecondsSinceEpoch}',
+        ),
+      );
+      await testDir.create(recursive: true);
+
+      Hive.init(testDir.path);
       Hive.registerAdapter(ToDoModelAdapter());
       toDoBox = await Hive.openBox<ToDoModel>('integrationTestBox');
       final homeRepo = HomeRepoImpl(toDoBox: toDoBox);
@@ -48,7 +59,12 @@ void main() {
       final searchField = find.byType(TextField);
       await tester.enterText(searchField, 'Integration Test Task');
       await tester.pumpAndSettle();
-      expect(find.text('Integration Test Task'), findsOneWidget);
+expect(
+  find.byWidgetPredicate(
+    (widget) => widget is Text && widget.data == 'Integration Test Task',
+  ),
+  findsOneWidget,
+);
     });
   });
 }
